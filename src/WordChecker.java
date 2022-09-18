@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 public class WordChecker {
@@ -9,8 +8,9 @@ public class WordChecker {
         this.text = text;
     }
 
-    public boolean hasWord() {
+    public boolean hasWord(String word) {
         HashMap<String, Integer> map = new HashMap<>();
+
         String[] item = text.split("\\P{IsAlphabetic}+");
         for (String t : item) {
             if (map.containsKey(t)) {
@@ -20,13 +20,15 @@ public class WordChecker {
                 map.put(t, 1);
             }
         }
+
         Set<String> keys = map.keySet();
         for (String key : keys) {
-            if (map.get(key) > 1) {
-                System.out.println(key + " - " + map.get(key));
+            if (key.contains(word)) {
+                return true;
             }
 
         }
-        return true;
+        return false;
+
     }
 }
